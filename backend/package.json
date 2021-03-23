@@ -1,0 +1,29 @@
+{
+  "name": "api-blog",
+  "version": "0.0.1",
+  "description": "a small CRUD Blog API using express and sequelize",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n-caro/challenges-js.git"
+  },
+  "author": "Nicolas Caro (n-caro)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n-caro/challenges-js/issues"
+  },
+  "homepage": "https://github.com/n-caro/challenges-js#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.7",
+    "sequelize-cli": "^6.2.0"
+  }
+}
