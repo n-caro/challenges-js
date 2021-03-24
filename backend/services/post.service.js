@@ -14,7 +14,13 @@ const getAll = async () => {
   return posts;
 };
 
+const getById = async (id) => {
+  const query = { id };
+  return await db.Post.findOne({ where: query });
+};
+
 module.exports = {
   createPost,
   getAll,
+  getById,
 };
