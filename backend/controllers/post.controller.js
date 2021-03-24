@@ -4,7 +4,7 @@ const createPost = async (req, res) => {
   try {
     const { body } = req;
     const post = await PostService.createPost(body);
-    return res.json(post);
+    return res.status(201).json(post);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
