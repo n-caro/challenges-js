@@ -16,7 +16,11 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const query = { id };
-  return await db.Post.findOne({ where: query });
+  return await db.Post.findOne({
+    where: query,
+    attributes: ["id", "title", "body", "image", "creationDate"],
+    include: { model: db.Category, attributes: ["id", "name"] },
+  });
 };
 
 module.exports = {
