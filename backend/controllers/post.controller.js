@@ -45,4 +45,15 @@ const deletePost = async (req, res) => {
   }
 };
 
-module.exports = { createPost, getAll, getById, deletePost };
+const updatePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { body } = req;
+    const postUpdated = await PostService.update(id, body);
+    return res.status(204).json();
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { createPost, getAll, getById, deletePost, updatePost };

@@ -28,9 +28,24 @@ const deletePost = async (id) => {
   return db.Post.destroy({ where: query });
 };
 
+const update = async (id, fieldsToUpdate) => {
+  const query = { id };
+  const post = await getById(id);
+  if (!post) {
+    throw new Error("Post does not exist.");
+  }
+  const update = await db.Post.update(fieldsToUpdate, { where: { id } });
+  const isUpdated = update == 1;
+  if (!isUpdated) {
+    throw new Error("Operation could not be updated.");
+  }
+  return true;
+};
+
 module.exports = {
   createPost,
   getAll,
   getById,
   deletePost,
+  update,
 };
