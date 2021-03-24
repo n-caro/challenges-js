@@ -23,8 +23,14 @@ const getById = async (id) => {
   });
 };
 
+const deletePost = async (id) => {
+  const query = { id };
+  return db.Post.destroy({ where: query });
+};
+
 module.exports = {
   createPost,
   getAll,
   getById,
+  deletePost,
 };
