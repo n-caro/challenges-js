@@ -1,40 +1,29 @@
-const db = require("../models");
+const postRepository = require("../repositories/post.repository");
 
 const createPost = async (body) => {
-  const post = await db.Post.create(body);
+  const post = await postRepository.create(body);
   return post;
 };
 
 const getAll = async () => {
-  const posts = await db.Post.findAll({
-    attributes: ["id", "title", "image", "creationDate"],
-    include: { model: db.Category, attributes: ["id", "name"] },
-    order: [["creationDate", "DESC"]],
-  });
+  const posts = await postRepository.getAll();
   return posts;
 };
 
 const getById = async (id) => {
-  const query = { id };
-  return await db.Post.findOne({
-    where: query,
-    attributes: ["id", "title", "body", "image", "creationDate"],
-    include: { model: db.Category, attributes: ["id", "name"] },
-  });
+  return await postRepository.getById(id);
 };
 
 const deletePost = async (id) => {
-  const query = { id };
-  return db.Post.destroy({ where: query });
+  return postRepository.deletePost(id);
 };
 
 const update = async (id, fieldsToUpdate) => {
-  const query = { id };
-  const post = await getById(id);
+  const post = await postRepository.getById(id);
   if (!post) {
     throw new Error("Post does not exist.");
   }
-  const update = await db.Post.update(fieldsToUpdate, { where: { id } });
+  const update = await postRepository.update(id, fieldsToUpdate);
   const isUpdated = update == 1;
   if (!isUpdated) {
     throw new Error("Operation could not be updated.");
