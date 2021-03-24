@@ -9,13 +9,17 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       title: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(60),
+        allowNull: false,
+        unique: true,
       },
       body: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       image: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       categoryId: {
         type: Sequelize.INTEGER,
@@ -27,6 +31,7 @@ module.exports = {
       },
       creationDate: {
         type: Sequelize.DATE,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

@@ -9,25 +9,60 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Post.belongsTo(models.Category, {
+        foreignKey: "categoryId",
+      });
     }
   }
   Post.init(
     {
-      title: DataTypes.STRING,
-      body: DataTypes.STRING,
-      image: DataTypes.STRING,
-      categoryId: DataTypes.INTEGER,
-      creationDate: DataTypes.DATE,
+      title: {
+        type: DataTypes.STRING(60),
+        allowNull: false,
+        unique: true,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+        },
+      },
+      body: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+        },
+      },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: true,
+          notEmpty: true,
+          isUrl: true,
+        },
+      },
+      categoryId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          isInt: true,
+          notNull: true,
+        },
+      },
+      creationDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notNull: true,
+          isDate: true,
+        },
+      },
     },
     {
       sequelize,
       modelName: "Post",
     }
   );
-  Post.associate = function (models) {
-    Post.belongsTo(models.Category, {
-      foreignKey: "categoryId",
-    });
-  };
   return Post;
 };

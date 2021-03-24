@@ -9,22 +9,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Category.hasMany(models.Post, {
+        foreignKey: "categoryId",
+      });
     }
   }
   Category.init(
     {
-      name: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING(60),
+        allowNull: false,
+        unique: true,
+      },
     },
     {
       sequelize,
       modelName: "Category",
     }
   );
-  Category.associate = function (models) {
-    // associations can be defined here
-    Category.hasMany(models.Post, {
-      foreignKey: "categoryId",
-    });
-  };
   return Category;
 };
