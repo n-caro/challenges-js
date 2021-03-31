@@ -20,6 +20,9 @@ if (config.use_env_variable) {
   );
 }
 
+// disable logging
+sequelize.options.logging = false;
+
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (
